@@ -5,6 +5,7 @@ class Piece {
       y: 1,
     };
     this.matrix = matrix;
+    this.rows = this.cols = this.matrix.length;
     this.color = color;
   }
 
@@ -20,16 +21,22 @@ class Piece {
   }
 
   drop() {
-    piece.pos.y++;
+    this.pos.y++;
     dropCounter = 0;
+    if (this.collision(playfield)) {
+      this.pos.y = 0;
+    }
   }
 
   move(dir) {
     this.pos.x += dir;
+    if (this.collision(playfield)) {
+      this.pos.x -= dir;
+    }
   }
 
   rotate(dir) {
-    for (let y = 0; y < this.matrix.length; y++) {
+    for (let y = 0; y < this.rows; y++) {
       for (let x = 0; x < y; x++) {
         [
           [this.matrix[y][x]], 
@@ -41,6 +48,23 @@ class Piece {
       }
     }
     dir > 0 ? this.matrix.forEach(row => row.reverse()) : this.matrix.reverse();
+  }
+
+  collision(playfield) {
+    for (let y = 0; y < this.rows; y++) {
+      for (let x = 0; x < this.cols; x++) {
+        if (
+          this.matrix[y][x] &&
+          (
+            playfield.matrix[y + this.pos.y] &&
+            playfield.matrix[y + this.pos.y][x + this.pos.x]
+          ) !== 0
+        ) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 }
 
