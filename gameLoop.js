@@ -12,12 +12,12 @@ function mainLoop(time = 0) {
 
     dropCounter += deltaTime;
     if (dropCounter > dropInterval) {
-        dropPiece();
+        //piece.drop();
     }
 
     lastTime = time;
 
-    draw();
+    drawAll();
     requestAnimationFrame(mainLoop);
 }
 mainLoop();
