@@ -17,12 +17,12 @@ addEventListener("keydown", ({ code }) => {
     
         case "ArrowUp":
         case "KeyW":
-            // rotate right
+            piece.rotate(1);
             break;
     
         case "ControlRight":
-        case "Q":
-            // rotate left
+        case "KeyQ":
+            piece.rotate(-1);
             break;
     
         default:
