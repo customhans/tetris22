@@ -6,12 +6,7 @@ class Playfield {
   }
 
   create() {
-    var a = this.rows;
-    const m = [];
-    while (a--) {
-      m.push(Array(this.cols).fill(0));
-    }
-    return m;
+    return Array.from(Array(this.rows), () => new Array(this.cols).fill(0));
   }
 
   merge(piece) {
