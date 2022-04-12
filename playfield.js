@@ -6,8 +6,9 @@ class Playfield {
   }
 
   create() {
+    var a = this.rows;
     const m = [];
-    while (this.rows--) {
+    while (a--) {
       m.push(Array(this.cols).fill(0));
     }
     return m;
@@ -32,6 +33,24 @@ class Playfield {
         }
       })
     })
+  }
+  
+  scanForFullRows() {
+    outer: for (let y = this.rows - 1; y > 0; y--) {
+      for (let x = 0; x < this.cols; x++) {
+        if (this.matrix[y][x] === 0) {
+          continue outer;
+        }
+        
+      }
+      this.rowClear(y);
+      y++;
+    }
+  }
+
+  rowClear(y) {
+    this.matrix.splice(y, 1);
+    this.matrix.unshift(Array(this.cols).fill(0));
   }
   
 }

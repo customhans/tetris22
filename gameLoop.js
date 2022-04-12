@@ -1,5 +1,5 @@
 let dropCounter = 0;
-let dropInterval = 100;
+let dropInterval = 300;
 let lastTime = 0;
 
 
@@ -12,7 +12,7 @@ function mainLoop(time = 0) {
 
   dropCounter += deltaTime;
   if (dropCounter > dropInterval) {
-    //piece.drop();
+    piece.drop();
   }
 
   lastTime = time;

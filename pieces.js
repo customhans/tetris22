@@ -75,6 +75,8 @@ class Piece {
   lock() {
     this.pos.y--;
     playfield.merge(this);
+    playfield.scanForFullRows();
+    
     piece = Piece.select();
     //this.pos.y = 0;
   }
