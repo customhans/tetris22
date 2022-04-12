@@ -2,7 +2,7 @@ class Piece {
   constructor({ matrix, color }) {
     this.pos = {
       x: 3,
-      y: 1,
+      y: 0,
     };
     this.matrix = matrix;
     this.rows = this.cols = this.matrix.length;
@@ -68,14 +68,14 @@ class Piece {
   }
 }
 
-// const piece = new Piece({
-//   matrix: [
-//     [0, 0, 0],
-//     [1, 1, 1],
-//     [0, 1, 0],
-//   ],
-//   color: "tomato",
-// });
+const piece = new Piece({
+  matrix: [
+    [0, 0, 0],
+    [1, 1, 1],
+    [0, 1, 0],
+  ],
+  color: "tomato",
+});
 
 const zPiece = new Piece({
   matrix: [
@@ -86,7 +86,7 @@ const zPiece = new Piece({
   color: "lime",
 });
 
-const piece = new Piece({
+const ipiece = new Piece({
   matrix: [
     [0, 0, 0, 0],
     [1, 1, 1, 1],
