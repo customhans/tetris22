@@ -33,6 +33,13 @@ class Piece {
     }
   }
 
+  hardDrop() {
+    while(!this.collision(playfield)) {
+      this.pos.y++;
+    }
+    this.pos.y--;
+  }
+
   move(dir) {
     this.pos.x += dir;
     if (this.collision(playfield)) {

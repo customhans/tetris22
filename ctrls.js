@@ -1,4 +1,5 @@
 addEventListener("keydown", ({ code }) => {
+  console.log(code)
   switch (code) {
     case "ArrowLeft":
     case "KeyA":
@@ -13,6 +14,10 @@ addEventListener("keydown", ({ code }) => {
     case "ArrowDown":
     case "KeyS":
       piece.drop();
+      break;
+
+    case "Space":
+      piece.hardDrop();
       break;
 
     case "ArrowUp":
