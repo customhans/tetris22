@@ -10,7 +10,7 @@ addEventListener("keydown", ({ code }) => {
       piece.move(1);
       break;
 
-    case "ArrowBottom":
+    case "ArrowDown":
     case "KeyS":
       piece.drop();
       break;
