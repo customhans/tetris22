@@ -4,7 +4,7 @@ class Playfield {
         this.cols = 10;
         this.matrix = this.create();
     }
-    
+
     create() {
         const m = [];
         while(this.rows--) {
@@ -14,4 +14,5 @@ class Playfield {
     }
 
 }
-const playfield = new Playfield()
+
+const playfield = new Playfield();

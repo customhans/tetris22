@@ -24,7 +24,7 @@ class Piece {
     }
 
     drop() {
-        //piece.pos.y++;
+        piece.pos.y++;
         dropCounter = 0;
     }
 }
