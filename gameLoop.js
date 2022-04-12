@@ -17,7 +17,7 @@ function mainLoop(time = 0) {
 
     lastTime = time;
 
-    drawAll();
+    game.drawAll();
     requestAnimationFrame(mainLoop);
 }
 mainLoop();
