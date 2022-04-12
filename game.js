@@ -1,6 +1,7 @@
 const game = {
   drawAll() {
     this.drawCanvas();
+    playfield.draw();
     piece.draw();
   },
 

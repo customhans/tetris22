@@ -24,7 +24,7 @@ class Piece {
     this.pos.y++;
     dropCounter = 0;
     if (this.collision(playfield)) {
-      this.pos.y = 0;
+      this.lock();
     }
   }
 
@@ -65,6 +65,12 @@ class Piece {
       }
     }
     return false;
+  }
+
+  lock() {
+    this.pos.y--;
+    playfield.merge(this);
+    this.pos.y = 0;
   }
 }
 
