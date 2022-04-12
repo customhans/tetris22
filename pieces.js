@@ -68,11 +68,30 @@ class Piece {
   }
 }
 
-const piece = new Piece({
+// const piece = new Piece({
+//   matrix: [
+//     [0, 0, 0],
+//     [1, 1, 1],
+//     [0, 1, 0],
+//   ],
+//   color: "tomato",
+// });
+
+const zPiece = new Piece({
   matrix: [
     [0, 0, 0],
-    [1, 1, 1],
-    [0, 1, 0],
+    [1, 1, 0],
+    [0, 1, 1],
   ],
-  color: "tomato",
+  color: "lime",
+});
+
+const piece = new Piece({
+  matrix: [
+    [0, 0, 0, 0],
+    [1, 1, 1, 1],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+  ],
+  color: "cyan",
 });
