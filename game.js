@@ -1,4 +1,8 @@
 const game = {
+  start() {
+    console.log("start");
+  },
+
   drawAll() {
     this.drawCanvas();
     playfield.draw();

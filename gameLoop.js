@@ -12,7 +12,7 @@ function mainLoop(time = 0) {
 
   dropCounter += deltaTime;
   if (dropCounter > dropInterval) {
-    piece.drop();
+    //piece.drop();
   }
 
   lastTime = time;

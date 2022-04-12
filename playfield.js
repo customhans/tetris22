@@ -27,7 +27,8 @@ class Playfield {
     this.matrix.forEach((row, y) => {
       row.forEach((value, x) => {
         if (value) {
-          ctx.fillStyle = "green"
+          
+          ctx.fillStyle = Piece.colors[value - 1];
           ctx.fillRect(x, y, 1, 1);
         }
       });

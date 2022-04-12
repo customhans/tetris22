@@ -9,8 +9,10 @@ class Piece {
 
   static select() {
     const randNr = Math.floor(Math.random() * 7);
-    return [pieces[randNr]];
+    return new Piece(pieces[randNr]);
   }
+
+  static colors = ["cyan", "blue", "orange", "yellow", "green", "purple", "red"];
 
   draw() {
     this.matrix.forEach((row, y) => {
@@ -42,12 +44,12 @@ class Piece {
     for (let y = 0; y < this.rows; y++) {
       for (let x = 0; x < y; x++) {
         [
-          [this.matrix[y][x]], 
+          [this.matrix[y][x]],
           [this.matrix[x][y]],
         ] = [
-          [this.matrix[x][y]],
-          [this.matrix[y][x]],
-        ];
+            [this.matrix[x][y]],
+            [this.matrix[y][x]],
+          ];
       }
     }
     dir > 0 ? this.matrix.forEach(row => row.reverse()) : this.matrix.reverse();
@@ -73,31 +75,26 @@ class Piece {
   lock() {
     this.pos.y--;
     playfield.merge(this);
-    this.pos.y = 0;
+    piece = Piece.select();
+    //this.pos.y = 0;
   }
 }
 
-const piece = new Piece({
-  matrix: [
-    [0, 0, 0],
-    [1, 1, 1],
-    [0, 1, 0],
-  ],
-  color: "tomato",
-});
 
-const iPiece = new Piece({
-  type: "iPiece",
-  matrix: [
-    [0, 0, 0, 0],
-    [1, 1, 1, 1],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-  ],
-  color: "cyan",
-});
 
-const jPiece = new Piece({
+const pieces = [
+  {
+    type: "iPiece",
+    matrix: [
+      [0, 0, 0, 0],
+      [1, 1, 1, 1],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+    ],
+    color: "cyan",
+  },
+
+{
   type: "jPiece",
   matrix: [
     [2, 0, 0],
@@ -105,9 +102,8 @@ const jPiece = new Piece({
     [0, 0, 0],
   ],
   color: "blue",
-});
-
-const lPiece = new Piece({
+},
+{
   type: "lPiece",
   matrix: [
     [0, 0, 3],
@@ -115,50 +111,46 @@ const lPiece = new Piece({
     [0, 0, 0],
   ],
   color: "orange",
-});
+},
 
-const oPiece = new Piece({
-  type: "oPiece",
-  matrix: [
-    [0, 4, 4, 0],
-    [0, 4, 4, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-  ],
-  color: "yellow",
-});
+  {
+    type: "oPiece",
+    matrix: [
+      [0, 4, 4, 0],
+      [0, 4, 4, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+    ],
+    color: "yellow",
+  },
 
-const sPiece = new Piece({
-  type: "sPiece",
-  matrix: [
-    [0, 5, 5],
-    [5, 5, 0],
-    [0, 0, 0],
-  ],
-  color: "green",
-});
+  {
+    type: "sPiece",
+    matrix: [
+      [0, 5, 5],
+      [5, 5, 0],
+      [0, 0, 0],
+    ],
+    color: "green",
+  },
 
-const tPiece = new Piece({
-  type: "tPiece",
-  matrix: [
-    [0, 6, 0],
-    [6, 6, 6],
-    [0, 0, 0],
-  ],
-  color: "purple",
-});
+  {
+    type: "tPiece",
+    matrix: [
+      [0, 6, 0],
+      [6, 6, 6],
+      [0, 0, 0],
+    ],
+    color: "purple",
+  },
 
-const zPiece = new Piece({
-  type: "zPiece",
-  matrix: [
-    [7, 7, 0],
-    [0, 7, 7],
-    [0, 0, 0],
-  ],
-  color: "red",
-});
-
-const pieces = [iPiece, jPiece, lPiece, oPiece, sPiece, tPiece, zPiece];
-
-// Pieces: i, j, l, o, s, t, z
-const colors = ["cyan", "blue", "orange", "yellow", "green", "purple", "red" ];
+  {
+    type: "zPiece",
+    matrix: [
+      [7, 7, 0],
+      [0, 7, 7],
+      [0, 0, 0],
+    ],
+    color: "red",
+  }
+]
