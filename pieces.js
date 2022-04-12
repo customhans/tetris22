@@ -101,3 +101,6 @@ const ipiece = new Piece({
   ],
   color: "cyan",
 });
+
+// Pieces: i, j, l, o, s, t, z
+const colors = ["cyan", "blue", "orange", "yellow", "green", "purple", "red" ];
