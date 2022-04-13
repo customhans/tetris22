@@ -7,7 +7,7 @@ class Piece {
   }
 
   static select() {
-    const randNr = Math.floor(Math.random() * 7);
+    const randNr = Math.random() * 7 | 0;
     return new Piece(pieces[randNr]);
   }
 
@@ -30,7 +30,7 @@ class Piece {
   }
 
   hardDrop() {
-    while(!this.collision(playfield)) {
+    while (!this.collision(playfield)) {
       this.pos.y++;
     }
     this.pos.y--;
@@ -79,7 +79,7 @@ class Piece {
     this.pos.y--;
     playfield.merge(this);
     playfield.scanForFullRows();
-    
+
     piece = Piece.select();
     //this.pos.y = 0;
   }
@@ -96,26 +96,24 @@ const pieces = [
     ],
     image: "./img/iPiece.jpg"
   },
-
-{
-  type: "jPiece",
-  matrix: [
-    [2, 0, 0],
-    [2, 2, 2],
-    [0, 0, 0],
-  ],
-  image: "./img/jPiece.jpg"
-},
-{
-  type: "lPiece",
-  matrix: [
-    [0, 0, 3],
-    [3, 3, 3],
-    [0, 0, 0],
-  ],
-  image: "./img/lPiece.jpg"
-},
-
+  {
+    type: "jPiece",
+    matrix: [
+      [2, 0, 0],
+      [2, 2, 2],
+      [0, 0, 0],
+    ],
+    image: "./img/jPiece.jpg"
+  },
+  {
+    type: "lPiece",
+    matrix: [
+      [0, 0, 3],
+      [3, 3, 3],
+      [0, 0, 0],
+    ],
+    image: "./img/lPiece.jpg"
+  },
   {
     type: "oPiece",
     matrix: [
@@ -126,7 +124,6 @@ const pieces = [
     ],
     image: "./img/oPiece.jpg"
   },
-
   {
     type: "sPiece",
     matrix: [
@@ -136,7 +133,6 @@ const pieces = [
     ],
     image: "./img/sPiece.jpg"
   },
-
   {
     type: "tPiece",
     matrix: [
@@ -146,7 +142,6 @@ const pieces = [
     ],
     image: "./img/tPiece.jpg"
   },
-
   {
     type: "zPiece",
     matrix: [
@@ -155,12 +150,12 @@ const pieces = [
       [0, 0, 0],
     ],
     image: "./img/zPiece.jpg"
-  }
+  },
 ]
 
 function createImageArray() {
   const imgs = [];
-  
+
   pieces.forEach(piece => {
     let img = new Image();
     img.src = piece.image;
