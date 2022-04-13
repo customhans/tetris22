@@ -1,7 +1,7 @@
 const game = {
   loop: {
     dropCounter: 0,
-    dropInterval: 500,
+    dropInterval: 10,
     lastTime: 0,
     fr: null,
   },
@@ -25,6 +25,7 @@ const game = {
   },
   
   stop() {
+    console.log("game over");
     cancelAnimationFrame(this.loop.fr);
   },
 
@@ -49,6 +50,8 @@ const game = {
   },
 
   mainLoop(time = 0) {
+    this.loop.fr = requestAnimationFrame(this.mainLoop.bind(this));
+
     const deltaTime = time - this.loop.lastTime;
   
     this.loop.dropCounter += deltaTime;
@@ -59,7 +62,6 @@ const game = {
     this.loop.lastTime = time;
   
     game.drawAll();
-    this.loop.fr = requestAnimationFrame(this.mainLoop.bind(this));
   }
 }
 

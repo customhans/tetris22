@@ -12,6 +12,14 @@ class Piece {
   }
 
   draw() {
+    /**
+    * Losing condition: If piece is immediately blocked
+    * at spawn location (pos.y === 0), the game is over
+    */
+    if (!this.pos.y && this.collision(playfield)) {
+      game.stop();
+    }
+
     this.matrix.forEach((row, y) => {
       row.forEach((value, x) => {
         if (value) {
