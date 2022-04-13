@@ -1,7 +1,7 @@
 const game = {
   loop: {
     dropCounter: 0,
-    dropInterval: 10,
+    dropInterval: 100,
     lastTime: 0,
     fr: null,
   },
@@ -19,14 +19,33 @@ const game = {
   },
 
   start() {
-    this.createCanvas();
+    /**
+    * "This" is still referring to the button here,
+    * so use "game" instead
+    */
+    game.createCanvas();
+    playfield = new Playfield();
     piece = Piece.select()
-    this.mainLoop();
+    game.mainLoop();
   },
   
   stop() {
-    console.log("game over");
     cancelAnimationFrame(this.loop.fr);
+    this.killscreen();
+  },
+
+  killscreen() {
+    const outer = document.createElement("div");
+    outer.setAttribute("class", "killscreen");
+    const  inner = document.createElement("div");
+    const text = document.createTextNode("Game Over :(");
+    const btn = document.createElement("button");
+    btn.innerHTML = "Restart";
+    btn.addEventListener("click", this.start);
+    inner.appendChild(text);
+    inner.appendChild(btn);
+    outer.appendChild(inner);
+    document.querySelector(".container").appendChild(outer);
   },
 
   createCanvas() {

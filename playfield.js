@@ -46,5 +46,3 @@ class Playfield {
     this.matrix.unshift(Array(this.cols).fill(0));
   }
 }
-
-const playfield = new Playfield();
