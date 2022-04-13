@@ -28,12 +28,13 @@ class Piece {
       this.lock();
     }
   }
-
+  
   hardDrop() {
     while (!this.collision(playfield)) {
       this.pos.y++;
     }
     this.pos.y--;
+    game.loop.lastTime = 0;
   }
 
   move(dir) {
