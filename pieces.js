@@ -22,7 +22,7 @@ class Piece {
   }
 
   drop() {
-    //this.pos.y++;
+    this.pos.y++;
     game.loop.dropCounter = 0;
     if (this.collision(playfield)) {
       this.lock();

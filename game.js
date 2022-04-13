@@ -1,15 +1,16 @@
-
-var fr;
-
 const game = {
   loop: {
     dropCounter: 0,
-    dropInterval: 300,
+    dropInterval: 500,
     lastTime: 0,
   },
 
   start() {
     this.mainLoop();
+  },
+  
+  stop() {
+    cancelAnimationFrame(fr);
   },
 
   drawAll() {
@@ -21,10 +22,6 @@ const game = {
   drawCanvas() {
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-  },
-
-  end() {
-    cancelAnimationFrame(fr);
   },
 
   mainLoop(time = 0) {
