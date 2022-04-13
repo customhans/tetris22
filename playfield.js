@@ -4,6 +4,7 @@ class Playfield {
     this.cols = 10;
     this.matrix = this.create();
     this.rowClearDelay = 300;
+    this.rowClearEffect = "opacity(25%)";
   }
 
   create() {
@@ -45,10 +46,11 @@ class Playfield {
         }
       }
       rowsToClear.push(y);
-
+      ctx.filter = this.rowClearEffect;
     }
     setTimeout(() => {
       this.clearRows(rowsToClear);
+      ctx.filter = 'none';
     }, 250);
   }
 
