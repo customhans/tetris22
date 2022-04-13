@@ -1,10 +1,9 @@
 class Piece {
-  constructor({ type, matrix, color }) {
+  constructor({ type, matrix }) {
     this.type = type;
     this.pos = { x: 3, y: 0 };
     this.matrix = matrix;
     this.rows = this.cols = this.matrix.length;
-    this.color = color;
   }
 
   static select() {
@@ -12,17 +11,14 @@ class Piece {
     return new Piece(pieces[randNr]);
   }
 
-  static colors = ["cyan", "blue", "orange", "yellow", "green", "purple", "red"];
-
   draw() {
     this.matrix.forEach((row, y) => {
       row.forEach((value, x) => {
         if (value) {
-          ctx.fillStyle = this.color;
-          ctx.fillRect(x + this.pos.x, y + this.pos.y, 1, 1);
+          ctx.drawImage(images[value - 1], x + this.pos.x, y + this.pos.y, 1, 1);
         }
-      });
-    });
+      })
+    })
   }
 
   drop() {
@@ -89,8 +85,6 @@ class Piece {
   }
 }
 
-
-
 const pieces = [
   {
     type: "iPiece",
@@ -100,7 +94,7 @@ const pieces = [
       [0, 0, 0, 0],
       [0, 0, 0, 0],
     ],
-    color: "cyan",
+    image: "./img/iPiece.jpg"
   },
 
 {
@@ -110,7 +104,7 @@ const pieces = [
     [2, 2, 2],
     [0, 0, 0],
   ],
-  color: "blue",
+  image: "./img/jPiece.jpg"
 },
 {
   type: "lPiece",
@@ -119,7 +113,7 @@ const pieces = [
     [3, 3, 3],
     [0, 0, 0],
   ],
-  color: "orange",
+  image: "./img/lPiece.jpg"
 },
 
   {
@@ -130,7 +124,7 @@ const pieces = [
       [0, 0, 0, 0],
       [0, 0, 0, 0],
     ],
-    color: "yellow",
+    image: "./img/oPiece.jpg"
   },
 
   {
@@ -140,7 +134,7 @@ const pieces = [
       [5, 5, 0],
       [0, 0, 0],
     ],
-    color: "green",
+    image: "./img/sPiece.jpg"
   },
 
   {
@@ -150,7 +144,7 @@ const pieces = [
       [6, 6, 6],
       [0, 0, 0],
     ],
-    color: "purple",
+    image: "./img/tPiece.jpg"
   },
 
   {
@@ -160,6 +154,19 @@ const pieces = [
       [0, 7, 7],
       [0, 0, 0],
     ],
-    color: "red",
+    image: "./img/zPiece.jpg"
   }
 ]
+
+function createImageArray() {
+  const imgs = [];
+  
+  pieces.forEach(piece => {
+    let img = new Image();
+    img.src = piece.image;
+    imgs.push(img);
+  })
+  return imgs;
+}
+
+const images = createImageArray();

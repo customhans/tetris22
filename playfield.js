@@ -23,8 +23,7 @@ class Playfield {
     this.matrix.forEach((row, y) => {
       row.forEach((value, x) => {
         if (value) {
-          ctx.fillStyle = Piece.colors[value - 1];
-          ctx.fillRect(x, y, 1, 1);
+          ctx.drawImage(images[value - 1], x, y, 1, 1);
         }
       })
     })
@@ -36,7 +35,6 @@ class Playfield {
         if (this.matrix[y][x] === 0) {
           continue outer;
         }
-        
       }
       this.rowClear(y);
       y++;
@@ -47,7 +45,6 @@ class Playfield {
     this.matrix.splice(y, 1);
     this.matrix.unshift(Array(this.cols).fill(0));
   }
-  
 }
 
 const playfield = new Playfield();
