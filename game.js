@@ -1,9 +1,13 @@
-let dropCounter = 0;
-let dropInterval = 300;
-let lastTime = 0;
+
 var fr;
 
 const game = {
+  loop: {
+    dropCounter: 0,
+    dropInterval: 300,
+    lastTime: 0,
+  },
+
   start() {
     this.mainLoop();
   },
@@ -24,14 +28,14 @@ const game = {
   },
 
   mainLoop(time = 0) {
-    const deltaTime = time - lastTime;
+    const deltaTime = time - this.loop.lastTime;
   
-    dropCounter += deltaTime;
-    if (dropCounter > dropInterval) {
+    this.loop.dropCounter += deltaTime;
+    if (this.loop.dropCounter > this.loop.dropInterval) {
       piece.drop();
     }
   
-    lastTime = time;
+    this.loop.lastTime = time;
   
     game.drawAll();
     fr = requestAnimationFrame(this.mainLoop.bind(this));

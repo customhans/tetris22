@@ -1,5 +1,4 @@
 addEventListener("keydown", ({ code }) => {
-  console.log(code)
   switch (code) {
     case "ArrowLeft":
     case "KeyA":
