@@ -3,14 +3,38 @@ const game = {
     dropCounter: 0,
     dropInterval: 500,
     lastTime: 0,
+    fr: null,
+  },
+
+  config: {
+    //ghostPiece: true,
+  },
+
+  status: {
+    //running: true,
+  },
+
+  reset() {
+    // do stuff maybe
   },
 
   start() {
+    this.createCanvas();
+    piece = Piece.select()
     this.mainLoop();
   },
   
   stop() {
-    cancelAnimationFrame(fr);
+    cancelAnimationFrame(this.loop.fr);
+  },
+
+  createCanvas() {
+    document.querySelector(".container").innerHTML = "<canvas>";
+    canvas = document.querySelector("canvas");
+    canvas.width = 300;
+    canvas.height = 600;
+    ctx = canvas.getContext("2d");
+    ctx.scale(30, 30);
   },
 
   drawAll() {
@@ -35,7 +59,7 @@ const game = {
     this.loop.lastTime = time;
   
     game.drawAll();
-    fr = requestAnimationFrame(this.mainLoop.bind(this));
+    this.loop.fr = requestAnimationFrame(this.mainLoop.bind(this));
   }
 }
 
