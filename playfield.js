@@ -3,6 +3,7 @@ class Playfield {
     this.rows = 20;
     this.cols = 10;
     this.matrix = this.create();
+    this.rowClearDelay = 300;
   }
 
   create() {
@@ -41,8 +42,10 @@ class Playfield {
           continue outer;
         }
       }
-      this.rowClear(y);
-      y++;
+      setTimeout(() => {
+        this.rowClear(y);
+        y++;
+      }, this.rowClearDelay)
     }
   }
 
