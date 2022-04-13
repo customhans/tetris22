@@ -22,7 +22,7 @@ class Piece {
   }
 
   drop() {
-    this.pos.y++;
+    //this.pos.y++;
     game.loop.dropCounter = 0;
     if (this.collision(playfield)) {
       this.lock();
@@ -56,6 +56,18 @@ class Piece {
       }
     }
     dir > 0 ? this.matrix.forEach(row => row.reverse()) : this.matrix.reverse();
+    
+    if (this.collision(playfield)) {
+      this.wallKick();
+    }
+  }
+
+  wallKick() {
+    let offset = 1;
+    while (this.collision(playfield)) {
+      this.pos.x += offset;
+      offset = -(offset + (offset > 0 ? 1 : -1))
+    }
   }
 
   collision(playfield) {
