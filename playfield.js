@@ -32,6 +32,11 @@ class Playfield {
   scanForFullRows() {
     outer: for (let y = this.rows - 1; y > 0; y--) {
       for (let x = 0; x < this.cols; x++) {
+
+        /**
+        * if at least one value is < 1,
+        * the row can't be full -> continue in next row
+        */
         if (this.matrix[y][x] === 0) {
           continue outer;
         }
