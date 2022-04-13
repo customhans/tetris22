@@ -30,6 +30,8 @@ class Playfield {
   }
   
   scanForFullRows() {
+    let rowsToClear = [];
+
     outer: for (let y = this.rows - 1; y > 0; y--) {
       for (let x = 0; x < this.cols; x++) {
 
@@ -41,13 +43,15 @@ class Playfield {
           continue outer;
         }
       }
-      this.rowClear(y);
-      y++;
+      rowsToClear.push(y);
     }
+    setTimeout(() => {
+      this.clearRows(rowsToClear);
+    }, 250);
   }
 
-  rowClear(y) {
-    this.matrix.splice(y, 1);
-    this.matrix.unshift(Array(this.cols).fill(0));
+  clearRows(rowsToClear) {
+    rowsToClear.forEach(row => this.matrix.splice(row, 1));
+    rowsToClear.forEach(_ => this.matrix.unshift(Array(this.cols).fill(0)));
   }
 }

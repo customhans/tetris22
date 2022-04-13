@@ -29,6 +29,10 @@ const game = {
     game.mainLoop();
   },
   
+  resume() {
+    game.mainLoop();
+  },
+  
   stop() {
     cancelAnimationFrame(this.loop.fr);
     this.killscreen();
