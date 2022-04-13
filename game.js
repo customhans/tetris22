@@ -1,7 +1,7 @@
 const game = {
   loop: {
     dropCounter: 0,
-    dropInterval: 100,
+    dropInterval: 300,
     lastTime: 0,
     fr: null,
   },
