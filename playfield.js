@@ -32,7 +32,7 @@ class Playfield {
   }
   
   scanForFullRows() {
-    let rowsToClear = [];
+    let fullRows = [];
 
     outer: for (let y = this.rows - 1; y > 0; y--) {
       for (let x = 0; x < this.cols; x++) {
@@ -45,18 +45,22 @@ class Playfield {
           continue outer;
         }
       }
-      rowsToClear.push(y);
+      fullRows.push(y);
       ctx.filter = this.rowClearEffect;
     }
-    setTimeout(() => {
-      this.clearRows(rowsToClear);
-      ctx.filter = 'none';
-    }, this.rowClearDelay);
+
+    // only clear full rows
+    if (fullRows.length) {
+      setTimeout(() => {
+        this.clearRows(fullRows);
+        ctx.filter = 'none';
+      }, this.rowClearDelay);
+    }
   }
 
-  clearRows(rowsToClear) {
-    game.updateLines(rowsToClear.length);
-    rowsToClear.forEach(row => this.matrix.splice(row, 1));
-    rowsToClear.forEach(_ => this.matrix.unshift(Array(this.cols).fill(0)));
+  clearRows(fullRows) {
+    game.updateAchievments(fullRows.length);
+    fullRows.forEach(row => this.matrix.splice(row, 1));
+    fullRows.forEach(_ => this.matrix.unshift(Array(this.cols).fill(0)));
   }
 }
