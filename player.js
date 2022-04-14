@@ -4,15 +4,14 @@ const player = {
   score: 0,
   lines: 0,
 
-  updateAchievments(clearedRowsCount) {
-    console.log("update --- " + clearedRowsCount)
-    // update lines
+  updateLineCount(clearedRowsCount) {
     this.lines += clearedRowsCount;
-
-    // update score
-    this.score += SCORE_MAP[clearedRowsCount]; // * this.player.level
-
     document.getElementById("lines").textContent = this.lines;
-    document.getElementById("score").textContent = this.score;
+    this.updateScore(SCORE_MAP[clearedRowsCount]);
   },
+  
+  updateScore(addedPoints) {
+    this.score += addedPoints; // * this.player.level
+    document.getElementById("score").textContent = this.score;
+  }
 }

@@ -12,7 +12,7 @@ addEventListener("keydown", ({ code }) => {
 
     case "ArrowDown":
     case "KeyS":
-      game.piece.drop();
+      game.piece.drop("byPlayer");
       break;
 
     case "Space":

@@ -44,8 +44,17 @@ class Piece {
     })
   }
 
-  drop() {
+  drop(type) {
     this.pos.y++;
+
+    /**
+     * Update score (+1 per drop), but 
+     * only for player-initiated drops
+     */
+    if (type === "byPlayer") {
+      player.updateScore(SCORE_MAP.softDrop);
+    }
+
     game.loop.dropCounter = 0;
     if (this.collision()) {
       this.lock();
@@ -62,10 +71,13 @@ class Piece {
   }
 
   hardDrop() {
+    let lineCounter = 0;
     while (!this.collision()) {
       this.pos.y++;
+      lineCounter++;
     }
     this.pos.y--;
+    player.updateScore(lineCounter * SCORE_MAP.hardDrop);
     game.loop.lastTime = 0;
   }
 
