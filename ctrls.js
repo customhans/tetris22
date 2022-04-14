@@ -2,31 +2,31 @@ addEventListener("keydown", ({ code }) => {
   switch (code) {
     case "ArrowLeft":
     case "KeyA":
-      piece.move(-1);
+      game.piece.move(-1);
       break;
 
     case "ArrowRight":
     case "KeyD":
-      piece.move(1);
+      game.piece.move(1);
       break;
 
     case "ArrowDown":
     case "KeyS":
-      piece.drop();
+      game.piece.drop();
       break;
 
     case "Space":
-      piece.hardDrop();
+      game.piece.hardDrop();
       break;
 
     case "ArrowUp":
     case "KeyW":
-      piece.rotate(1);
+      game.piece.rotate(1);
       break;
 
     case "ControlRight":
     case "KeyQ":
-      piece.rotate(-1);
+      game.piece.rotate(-1);
       break;
 
     default:

@@ -123,7 +123,7 @@ class Piece {
     playfield.merge(this);
     playfield.scanForFullRows();
 
-    piece = Piece.select();
+    game.newPiece();
     //this.pos.y = 0;
   }
 }

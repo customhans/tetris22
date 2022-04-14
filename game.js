@@ -10,9 +10,8 @@ const game = {
     //ghostPiece: true,
   },
 
-  status: {
-    //running: true,
-  },
+  piece: null,
+  nextThreePieces: [],
 
   reset() {
     // do stuff maybe
@@ -20,9 +19,13 @@ const game = {
 
   start() {
     this.createPlayfield();
+    this.newPiece();
     playfield = new Playfield();
-    piece = Piece.select()
     game.mainLoop();
+  },
+
+  newPiece() {
+    this.piece = Piece.select()
   },
   
   resume() {
@@ -62,8 +65,8 @@ const game = {
   drawAll() {
     this.drawCanvas();
     playfield.draw();
-    piece.draw();
-    piece.getGhost();
+    this.piece.draw();
+    this.piece.getGhost();
   },
 
   drawCanvas() {
@@ -79,7 +82,7 @@ const game = {
     this.loop.dropCounter += deltaTime;
 
     if (this.loop.dropCounter > this.loop.dropInterval) {
-      piece.drop();
+      this.piece.drop();
     }
   
     this.loop.lastTime = time;
