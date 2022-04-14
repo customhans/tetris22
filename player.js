@@ -30,6 +30,11 @@ const player = {
   levelUp() {
     this.stats.level++;
     this.updateStats();
+    console.log("level up")
+    if (game.loop.dropInterval >= 100) {
+      game.loop.dropInterval -= 50;
+      //console.log("new drop interval: " + game.loop.dropInterval)
+    }
   },
   
   clearStats() {

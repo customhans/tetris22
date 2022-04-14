@@ -1,7 +1,7 @@
 const game = {
   loop: {
     dropCounter: 0,
-    dropInterval: 1500,
+    dropInterval: 750,
     lastTime: 0,
     fr: null,
     gravity: true,
@@ -31,7 +31,7 @@ const game = {
     imgs = [...document.querySelectorAll("#preview > img")];
     const path = "./img/preview/";
     const ext = ".png";
-    
+
     imgs.forEach((img, idx) => {
       img.src = path + this.nextThreePieces[idx].type + ext;
     });
@@ -59,7 +59,7 @@ const game = {
 
     // cut first of the nextThreePieces
     this.piece = this.nextThreePieces.shift();
-    
+
     /* // DEV: get certain piece
     this.piece = new Piece(PIECES[6]) */
 
