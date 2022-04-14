@@ -4,7 +4,7 @@ class Piece {
     this.pos = { x: 3, y: 0 };
     this.matrix = matrix;
     this.rows = this.cols = this.matrix.length;
-    this.ghost = structuredClone(this);
+    this.ghost = null;
   }
 
   static select() {
