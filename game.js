@@ -11,6 +11,12 @@ const game = {
     //ghostPiece: true,
   },
 
+  player: {
+    time: 0,
+    score: 0,
+    lines: 0,
+  },
+
   piece: null,
   nextThreePieces: [],
 
@@ -43,6 +49,7 @@ const game = {
   },
 
   start() {
+    timer.start();
     // "this" might refer to restart button, so use "game"
     game.createPlayfield();
     game.newPiece();
@@ -83,11 +90,11 @@ const game = {
     inner.appendChild(text);
     inner.appendChild(btn);
     outer.appendChild(inner);
-    document.querySelector(".container").appendChild(outer);
+    document.getElementById("playfield").appendChild(outer);
   },
 
   createPlayfield() {
-    document.querySelector(".container").innerHTML = "<canvas>";
+    document.getElementById("playfield").innerHTML = "<canvas>";
     canvas = document.querySelector("canvas");
     canvas.width = 300;
     canvas.height = 600;

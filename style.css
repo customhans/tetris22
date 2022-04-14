@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  background-color: black;
+  background-color: #666666;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -14,7 +14,7 @@ body {
   background-color: black;
   display: flex;
   justify-content: space-between;
-  gap: .25em;
+  gap: 0.25em;
 }
 
 #preview img:first-child {
@@ -26,13 +26,22 @@ body {
 }
 
 #preview,
-.container,
+#playfield,
 button {
   background-color: black;
   border: 3px solid white;
 }
 
 .container {
+  display: flex;
+}
+
+.sidebar {
+  width: 100px;
+  border: 1px solid;
+}
+
+#playfield {
   position: relative;
   display: inline-block;
   width: 300px;
@@ -75,5 +84,3 @@ button:hover {
   border-color: lime;
   cursor: pointer;
 }
-
-
