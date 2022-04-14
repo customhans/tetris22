@@ -38,7 +38,7 @@ class Piece {
     matrix.forEach((row, y) => {
       row.forEach((value, x) => {
         if (value) {
-          ctx.drawImage(images[value - 1][part], x + posX, y + posY, 1, 1);
+          ctx.drawImage(IMAGES[value - 1][part], x + posX, y + posY, 1, 1);
         }
       })
     })

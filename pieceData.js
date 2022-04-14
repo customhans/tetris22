@@ -78,4 +78,4 @@ function createImageArray() {
   return imgs;
 }
 
-const images = createImageArray();
+const IMAGES = createImageArray();
