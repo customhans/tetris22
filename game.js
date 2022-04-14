@@ -23,7 +23,7 @@ const game = {
     * "This" is still referring to the button here,
     * so use "game" instead
     */
-    game.createCanvas();
+    game.createPlayfield();
     playfield = new Playfield();
     piece = Piece.select()
     game.mainLoop();
@@ -52,7 +52,9 @@ const game = {
     document.querySelector(".container").appendChild(outer);
   },
 
-  createCanvas() {
+
+
+  createPlayfield() {
     document.querySelector(".container").innerHTML = "<canvas>";
     canvas = document.querySelector("canvas");
     canvas.width = 300;
