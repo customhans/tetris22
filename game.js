@@ -20,48 +20,49 @@ const game = {
 
   updatePreviewPieces() {
     let counter = this.nextThreePieces.length;
-    while(counter++ < 3) {
+    while (counter++ < 3) {
       this.nextThreePieces.push(this.selectRandomPiece());
     }
+
+    this.updateDisplayPreviewPieces();
   },
 
-  updatePreviewPiecesDisplay() {
-    arr = [...document.querySelectorAll("#preview > img")];
-    arr.forEach((img, idx) => img.src = "./img/preview/" + game.nextThreePieces[idx].type + ".jpg");
+  updateDisplayPreviewPieces() {
+    imgs = [...document.querySelectorAll("#preview > img")];
+    const path = "./img/preview/";
+    const ext = ".jpg";
+    
+    imgs.forEach((img, idx) => {
+      img.src = path + this.nextThreePieces[idx].type + ext;
+    });
   },
 
   selectRandomPiece() {
-    const randNr = Math.random() * 7 | 0;
-    return new Piece(pieces[randNr]);
+    const randomNumber = (Math.random() * 7) | 0;
+    return new Piece(pieces[randomNumber]);
   },
 
   start() {
     this.createPlayfield();
-    this.updatePreviewPieces();
     this.newPiece();
     playfield = new Playfield();
     game.mainLoop();
   },
 
   newPiece() {
-    this.updatePreviewPiecesDisplay();
+    this.updatePreviewPieces();
 
     // cut first of the nextThreePieces
     this.piece = this.nextThreePieces.shift();
-    
+
     // immediately replace it in the preview array
     this.updatePreviewPieces();
-    this.updatePreviewPiecesDisplay();
-    console.log(this.nextThreePieces)
-    //updatePreviewDisplay();
   },
 
-  
-  
   resume() {
     this.mainLoop();
   },
-  
+
   stop() {
     cancelAnimationFrame(this.loop.fr);
     this.killscreen();
@@ -70,7 +71,7 @@ const game = {
   killscreen() {
     const outer = document.createElement("div");
     outer.setAttribute("class", "killscreen");
-    const  inner = document.createElement("div");
+    const inner = document.createElement("div");
     const text = document.createTextNode("Game Over :(");
     const btn = document.createElement("button");
     btn.innerHTML = "Restart";
@@ -106,17 +107,15 @@ const game = {
     this.loop.fr = requestAnimationFrame(this.mainLoop.bind(this));
 
     const deltaTime = time - this.loop.lastTime;
-  
+
     this.loop.dropCounter += deltaTime;
 
     if (this.loop.dropCounter > this.loop.dropInterval) {
       if (this.loop.gravity) this.piece.drop();
     }
-  
+
     this.loop.lastTime = time;
-  
+
     game.drawAll();
-  }
-}
-
-
+  },
+};
