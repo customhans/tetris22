@@ -78,10 +78,13 @@ class Piece {
   rotate(dir) {
     for (let y = 0; y < this.rows; y++) {
       for (let x = 0; x < y; x++) {
-        [[this.matrix[y][x]], [this.matrix[x][y]]] = [
+        [
+          [this.matrix[y][x]],
+          [this.matrix[x][y]]
+        ] = [
           [this.matrix[x][y]],
           [this.matrix[y][x]],
-        ];
+        ]
       }
     }
     dir > 0
@@ -110,8 +113,10 @@ class Piece {
         if (
           // check if piece value is not 0
           this.matrix[y][x] &&
+
           // check if row exists
           (playfield.matrix[y + posY] &&
+
             // check if playfield value is also not 0
             playfield.matrix[y + posY][x + posX]) !== 0
         ) {
@@ -207,8 +212,8 @@ function createImageArray() {
     imgs.push({
       original: original,
       ghost: ghost,
-    });
-  });
+    })
+  })
   return imgs;
 }
 
