@@ -79,6 +79,11 @@ const game = {
     this.killscreen();
   },
 
+  updateLines(quantity) {
+    this.player.lines += quantity;
+    document.getElementById("lines").textContent = this.player.lines;
+  },
+
   killscreen() {
     const outer = document.createElement("div");
     outer.setAttribute("class", "killscreen");

@@ -55,6 +55,7 @@ class Playfield {
   }
 
   clearRows(rowsToClear) {
+    game.updateLines(rowsToClear.length);
     rowsToClear.forEach(row => this.matrix.splice(row, 1));
     rowsToClear.forEach(_ => this.matrix.unshift(Array(this.cols).fill(0)));
   }
