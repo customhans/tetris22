@@ -1,7 +1,7 @@
 const game = {
   loop: {
     dropCounter: 0,
-    dropInterval: 300,
+    dropInterval: 1500,
     lastTime: 0,
     fr: null,
   },
@@ -19,18 +19,14 @@ const game = {
   },
 
   start() {
-    /**
-    * "This" is still referring to the button here,
-    * so use "game" instead
-    */
-    game.createPlayfield();
+    this.createPlayfield();
     playfield = new Playfield();
     piece = Piece.select()
     game.mainLoop();
   },
   
   resume() {
-    game.mainLoop();
+    this.mainLoop();
   },
   
   stop() {
