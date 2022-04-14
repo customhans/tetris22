@@ -65,6 +65,7 @@ const game = {
     this.drawCanvas();
     playfield.draw();
     piece.draw();
+    piece.getGhost();
   },
 
   drawCanvas() {
@@ -78,6 +79,7 @@ const game = {
     const deltaTime = time - this.loop.lastTime;
   
     this.loop.dropCounter += deltaTime;
+
     if (this.loop.dropCounter > this.loop.dropInterval) {
       piece.drop();
     }

@@ -12,7 +12,7 @@ class Piece {
     return new Piece(pieces[randNr]);
   }
 
-  draw() {
+  draw(ghost = false) {
     /**
     * Losing condition: If piece is immediately blocked
     * at spawn location (pos.y === 0), the game is over
@@ -21,10 +21,13 @@ class Piece {
       game.stop();
     }
 
-    this.matrix.forEach((row, y) => {
+    const matrix = ghost ? this.ghost.matrix : this.matrix;
+    const posX = ghost ? this.ghost.pos.x : this.pos.x;
+    const posY = ghost ? this.ghost.pos.y : this.pos.y;
+    matrix.forEach((row, y) => {
       row.forEach((value, x) => {
         if (value) {
-          ctx.drawImage(images[value - 1], x + this.pos.x, y + this.pos.y, 1, 1);
+          ctx.drawImage(images[value - 1], x + posX, y + posY, 1, 1);
         }
       })
     })
@@ -38,6 +41,15 @@ class Piece {
     }
   }
   
+  getGhost() {
+    this.ghost = structuredClone(this);
+    while(!this.collision(playfield, this.ghost)) {
+      this.ghost.pos.y++;
+    }
+    this.ghost.pos.y--;
+    this.draw(this.ghost);
+  }
+
   hardDrop() {
     while (!this.collision(playfield)) {
       this.pos.y++;
@@ -80,7 +92,10 @@ class Piece {
     }
   }
 
-  collision(playfield) {
+  collision(playfield, ghost = false) {
+      const posX = ghost ? this.ghost.pos.x : this.pos.x;
+      const posY = ghost ? this.ghost.pos.y : this.pos.y;
+
     for (let y = 0; y < this.rows; y++) {
       for (let x = 0; x < this.cols; x++) {
         if (
@@ -90,10 +105,10 @@ class Piece {
           (
 
             // check if row exists
-            playfield.matrix[y + this.pos.y] &&
+            playfield.matrix[y + posY] &&
 
             // check if playfield value is also not 0
-            playfield.matrix[y + this.pos.y][x + this.pos.x]
+            playfield.matrix[y + posY][x + posX]
           ) !== 0
         ) {
           return true;
