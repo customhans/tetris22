@@ -8,6 +8,7 @@ class Piece {
   }
 
   draw(ghost = false) {
+    
     /**
     * Losing condition: If piece is immediately blocked
     * at spawn location (pos.y === 0), the game is over
