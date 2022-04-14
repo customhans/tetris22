@@ -11,13 +11,6 @@ const game = {
     //ghostPiece: true,
   },
 
-  player: {
-    level: 5, 
-    time: 0,
-    score: 0,
-    lines: 0,
-  },
-
   piece: null,
   nextThreePieces: [],
 
@@ -85,18 +78,6 @@ const game = {
   stop() {
     cancelAnimationFrame(this.loop.fr);
     this.killscreen();
-  },
-
-  updateAchievments(clearedRowsCount) {
-    console.log("update --- " + clearedRowsCount)
-    // update lines
-    this.player.lines += clearedRowsCount;
-    
-    // update score
-    this.player.score += SCORE_MAP[clearedRowsCount]; // * this.player.level
-    
-    document.getElementById("lines").textContent = this.player.lines;
-    document.getElementById("score").textContent = this.player.score;
   },
 
   killscreen() {

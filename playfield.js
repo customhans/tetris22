@@ -59,7 +59,7 @@ class Playfield {
   }
 
   clearRows(fullRows) {
-    game.updateAchievments(fullRows.length);
+    player.updateAchievments(fullRows.length);
     fullRows.forEach(row => this.matrix.splice(row, 1));
     fullRows.forEach(_ => this.matrix.unshift(Array(this.cols).fill(0)));
   }
