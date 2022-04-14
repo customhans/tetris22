@@ -4,7 +4,7 @@ const game = {
     dropInterval: 1500,
     lastTime: 0,
     fr: null,
-    gravity: true,
+    gravity: false,
   },
 
   config: {
@@ -30,7 +30,7 @@ const game = {
   updateDisplayPreviewPieces() {
     imgs = [...document.querySelectorAll("#preview > img")];
     const path = "./img/preview/";
-    const ext = ".jpg";
+    const ext = ".png";
     
     imgs.forEach((img, idx) => {
       img.src = path + this.nextThreePieces[idx].type + ext;
@@ -54,6 +54,9 @@ const game = {
 
     // cut first of the nextThreePieces
     this.piece = this.nextThreePieces.shift();
+    
+    // DEV: get certain piece
+    //this.piece = new Piece(pieces[6])
 
     // immediately replace it in the preview array
     this.updatePreviewPieces();
