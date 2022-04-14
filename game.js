@@ -4,7 +4,7 @@ const game = {
     dropInterval: 1500,
     lastTime: 0,
     fr: null,
-    gravity: false,
+    gravity: true,
   },
 
   config: {

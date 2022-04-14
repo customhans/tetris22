@@ -49,14 +49,19 @@ button {
   width: 300px;
   height: 100px;
   margin-bottom: 1em;
-  border: 1px solid;
+  background-color: black;
+  border: 1px solid lightgrey;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
-  padding: 1em;
-  gap: .5em;
+  padding: .5em;
+  gap: .25em;
 }
 
+#preview img:first-child {
+  width: 40%;
+}
 #preview img {
   align-self: center;
+  width: 25%;
 }
