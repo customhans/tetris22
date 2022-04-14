@@ -25,6 +25,11 @@ const game = {
     }
   },
 
+  updatePreviewPiecesDisplay() {
+    arr = [...document.querySelectorAll("#preview > img")];
+    arr.forEach((img, idx) => img.src = "./img/preview/" + game.nextThreePieces[idx].type + ".jpg");
+  },
+
   selectRandomPiece() {
     const randNr = Math.random() * 7 | 0;
     return new Piece(pieces[randNr]);
@@ -39,11 +44,14 @@ const game = {
   },
 
   newPiece() {
+    this.updatePreviewPiecesDisplay();
+
     // cut first of the nextThreePieces
     this.piece = this.nextThreePieces.shift();
-
+    
     // immediately replace it in the preview array
     this.updatePreviewPieces();
+    this.updatePreviewPiecesDisplay();
     console.log(this.nextThreePieces)
     //updatePreviewDisplay();
   },
@@ -72,8 +80,6 @@ const game = {
     outer.appendChild(inner);
     document.querySelector(".container").appendChild(outer);
   },
-
-
 
   createPlayfield() {
     document.querySelector(".container").innerHTML = "<canvas>";
