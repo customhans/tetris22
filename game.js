@@ -45,11 +45,14 @@ const game = {
 
   selectRandomPiece() {
     const randomNumber = (Math.random() * 7) | 0;
-    return new Piece(pieces[randomNumber]);
+
+    // this needs to be a clone, otherwise source matrix gets changed
+    return new Piece(structuredClone(PIECES[randomNumber]));
   },
 
   start() {
     timer.start();
+
     // "this" might refer to restart button, so use "game"
     game.createPlayfield();
     game.newPiece();
@@ -63,8 +66,8 @@ const game = {
     // cut first of the nextThreePieces
     this.piece = this.nextThreePieces.shift();
     
-    // DEV: get certain piece
-    //this.piece = new Piece(pieces[6])
+    /* // DEV: get certain piece
+    this.piece = new Piece(PIECES[6]) */
 
     // immediately replace it in the preview array
     this.updatePreviewPieces();
@@ -72,6 +75,10 @@ const game = {
 
   resume() {
     this.mainLoop();
+  },
+
+  pause() {
+    cancelAnimationFrame(this.loop.fr);
   },
 
   stop() {

@@ -1,4 +1,4 @@
-const pieces = [
+const PIECES = [
   {
     type: "iPiece",
     matrix: [
@@ -64,7 +64,7 @@ function createImageArray() {
   const path = "./img/";
   const ext = ".png";
 
-  pieces.forEach((piece) => {
+  PIECES.forEach((piece) => {
     const original = new Image();
     const ghost = new Image();
     original.src = path + piece.type + ext;
