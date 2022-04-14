@@ -8,11 +8,10 @@ class Piece {
   }
 
   draw(ghost = false) {
-    
     /**
-    * Losing condition: If piece is immediately blocked
-    * at spawn location (pos.y === 0), the game is over
-    */
+     * Losing condition: If piece is immediately blocked
+     * at spawn location (pos.y === 0), the game is over
+     */
     if (!this.pos.y && this.collision()) {
       game.stop();
     }
@@ -20,13 +19,16 @@ class Piece {
     const matrix = ghost ? this.ghost.matrix : this.matrix;
     const posX = ghost ? this.ghost.pos.x : this.pos.x;
     const posY = ghost ? this.ghost.pos.y : this.pos.y;
+    const type = ghost ? "ghostPiece" : "originalPiece";
+
     matrix.forEach((row, y) => {
       row.forEach((value, x) => {
         if (value) {
-          ctx.drawImage(images[value - 1], x + posX, y + posY, 1, 1);
+          ctx.drawImage(images[value - 1][type], x + posX, y + posY, 1, 1);
+          //ctx.drawImage(images[value - 1], x + posX, y + posY, 1, 1);
         }
-      })
-    })
+      });
+    });
   }
 
   drop() {
@@ -36,10 +38,10 @@ class Piece {
       this.lock();
     }
   }
-  
+
   getGhost() {
     this.ghost = structuredClone(this);
-    while(!this.collision(this.ghost)) {
+    while (!this.collision(this.ghost)) {
       this.ghost.pos.y++;
     }
     this.ghost.pos.y--;
@@ -64,17 +66,16 @@ class Piece {
   rotate(dir) {
     for (let y = 0; y < this.rows; y++) {
       for (let x = 0; x < y; x++) {
-        [
-          [this.matrix[y][x]],
+        [[this.matrix[y][x]], [this.matrix[x][y]]] = [
           [this.matrix[x][y]],
-        ] = [
-            [this.matrix[x][y]],
-            [this.matrix[y][x]],
-          ];
+          [this.matrix[y][x]],
+        ];
       }
     }
-    dir > 0 ? this.matrix.forEach(row => row.reverse()) : this.matrix.reverse();
-    
+    dir > 0
+      ? this.matrix.forEach((row) => row.reverse())
+      : this.matrix.reverse();
+
     if (this.collision()) {
       this.wallKick();
     }
@@ -84,28 +85,23 @@ class Piece {
     let offset = 1;
     while (this.collision()) {
       this.pos.x += offset;
-      offset = -(offset + (offset > 0 ? 1 : -1))
+      offset = -(offset + (offset > 0 ? 1 : -1));
     }
   }
 
   collision(ghost = false) {
-      const posX = ghost ? this.ghost.pos.x : this.pos.x;
-      const posY = ghost ? this.ghost.pos.y : this.pos.y;
+    const posX = ghost ? this.ghost.pos.x : this.pos.x;
+    const posY = ghost ? this.ghost.pos.y : this.pos.y;
 
     for (let y = 0; y < this.rows; y++) {
       for (let x = 0; x < this.cols; x++) {
         if (
-          
           // check if piece value is not 0
           this.matrix[y][x] &&
-          (
-
-            // check if row exists
-            playfield.matrix[y + posY] &&
-
+          // check if row exists
+          (playfield.matrix[y + posY] &&
             // check if playfield value is also not 0
-            playfield.matrix[y + posY][x + posX]
-          ) !== 0
+            playfield.matrix[y + posY][x + posX]) !== 0
         ) {
           return true;
         }
@@ -133,7 +129,6 @@ const pieces = [
       [0, 0, 0, 0],
       [0, 0, 0, 0],
     ],
-    image: "./img/iPiece.jpg"
   },
   {
     type: "jPiece",
@@ -142,7 +137,6 @@ const pieces = [
       [2, 2, 2],
       [0, 0, 0],
     ],
-    image: "./img/jPiece.jpg"
   },
   {
     type: "lPiece",
@@ -151,7 +145,6 @@ const pieces = [
       [3, 3, 3],
       [0, 0, 0],
     ],
-    image: "./img/lPiece.jpg"
   },
   {
     type: "oPiece",
@@ -161,7 +154,6 @@ const pieces = [
       [0, 0, 0, 0],
       [0, 0, 0, 0],
     ],
-    image: "./img/oPiece.jpg"
   },
   {
     type: "sPiece",
@@ -170,7 +162,6 @@ const pieces = [
       [5, 5, 0],
       [0, 0, 0],
     ],
-    image: "./img/sPiece.jpg"
   },
   {
     type: "tPiece",
@@ -179,7 +170,6 @@ const pieces = [
       [6, 6, 6],
       [0, 0, 0],
     ],
-    image: "./img/tPiece.jpg"
   },
   {
     type: "zPiece",
@@ -188,18 +178,30 @@ const pieces = [
       [0, 7, 7],
       [0, 0, 0],
     ],
-    image: "./img/zPiece.jpg"
   },
-]
+];
 
 function createImageArray() {
   const imgs = [];
+  const path = "./img/";
+  const ext = ".png";
 
-  pieces.forEach(piece => {
-    let img = new Image();
-    img.src = piece.image;
-    imgs.push(img);
-  })
+  imgs.forEach((img, idx) => {
+    img.src = path + this.nextThreePieces[idx].type + ext;
+  });
+
+  pieces.forEach((piece) => {
+    const original = new Image();
+    original.src = path + piece.type + ext;
+
+    const ghost = new Image();
+    ghost.src = path + piece.type + "_ghost" + ext;
+
+    imgs.push({
+      originalPiece: original,
+      ghostPiece: ghost,
+    });
+  });
   return imgs;
 }
 

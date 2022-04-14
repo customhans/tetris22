@@ -25,7 +25,7 @@ class Playfield {
     this.matrix.forEach((row, y) => {
       row.forEach((value, x) => {
         if (value) {
-          ctx.drawImage(images[value - 1], x, y, 1, 1);
+          ctx.drawImage(images[value - 1]["originalPiece"], x, y, 1, 1);
         }
       })
     })
