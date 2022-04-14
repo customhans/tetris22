@@ -17,7 +17,7 @@ class Piece {
     * Losing condition: If piece is immediately blocked
     * at spawn location (pos.y === 0), the game is over
     */
-    if (!this.pos.y && this.collision(playfield)) {
+    if (!this.pos.y && this.collision()) {
       game.stop();
     }
 
@@ -36,14 +36,14 @@ class Piece {
   drop() {
     this.pos.y++;
     game.loop.dropCounter = 0;
-    if (this.collision(playfield)) {
+    if (this.collision()) {
       this.lock();
     }
   }
   
   getGhost() {
     this.ghost = structuredClone(this);
-    while(!this.collision(playfield, this.ghost)) {
+    while(!this.collision(this.ghost)) {
       this.ghost.pos.y++;
     }
     this.ghost.pos.y--;
@@ -51,7 +51,7 @@ class Piece {
   }
 
   hardDrop() {
-    while (!this.collision(playfield)) {
+    while (!this.collision()) {
       this.pos.y++;
     }
     this.pos.y--;
@@ -60,7 +60,7 @@ class Piece {
 
   move(dir) {
     this.pos.x += dir;
-    if (this.collision(playfield)) {
+    if (this.collision()) {
       this.pos.x -= dir;
     }
   }
@@ -79,20 +79,20 @@ class Piece {
     }
     dir > 0 ? this.matrix.forEach(row => row.reverse()) : this.matrix.reverse();
     
-    if (this.collision(playfield)) {
+    if (this.collision()) {
       this.wallKick();
     }
   }
 
   wallKick() {
     let offset = 1;
-    while (this.collision(playfield)) {
+    while (this.collision()) {
       this.pos.x += offset;
       offset = -(offset + (offset > 0 ? 1 : -1))
     }
   }
 
-  collision(playfield, ghost = false) {
+  collision(ghost = false) {
       const posX = ghost ? this.ghost.pos.x : this.pos.x;
       const posY = ghost ? this.ghost.pos.y : this.pos.y;
 
