@@ -1,4 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap');
+
 body {
+  font-family: 'Ubuntu', sans-serif;
   margin: 0;
   background-color: #666666;
   position: fixed;
@@ -20,6 +23,7 @@ body {
 #preview img:first-child {
   width: 40%;
 }
+
 #preview img {
   align-self: center;
   width: 25%;
@@ -40,10 +44,25 @@ button {
   width: 100px;
 }
 
-.sidebar > div {
-  border: 2px dashed;
+.sidebar>div {
+  position: relative;
+  border: 3px solid white;
   margin: 0 1em 1em;
-  padding: 1em;
+  padding: 1em 0.5em;
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: .6px;
+  color: lime;
+}
+
+p.label {
+  position: absolute;
+  top: -10px;
+  left: 5px;
+  margin: 0;
+  background: #666;
+  color: white;
+  width: 80%;
 }
 
 #playfield {
@@ -63,12 +82,12 @@ button {
   background-color: rgba(0, 0, 0, 0.55);
 }
 
-.killscreen > div {
+.killscreen>div {
   text-align: center;
   color: lime;
 }
 
-.killscreen > div,
+.killscreen>div,
 #playfield button {
   position: absolute;
   top: 45%;
