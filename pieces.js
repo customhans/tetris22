@@ -7,7 +7,20 @@ class Piece {
     this.ghost = null;
   }
 
-  draw(part, matrix, posX, posY) {
+   /**
+    * This draw function is used both for drawing
+    * the piece as well as the ghost (shadow), 
+    * depending on the input parameter "part"
+    * 
+    * The default parameters refer to the piece
+    */
+  draw(
+    part,
+    matrix = this.matrix,
+    posX = this.pos.x,
+    posY = this.pos.y
+    ) {
+    
     /**
      * Losing condition: If piece is immediately blocked
      * at spawn location (pos.y === 0), the game is over
@@ -15,23 +28,11 @@ class Piece {
     if (!this.pos.y && this.collision()) {
       game.stop();
     }
-
-    /**
-     * This draw function is used both for drawing
-     * the piece as well as the ghost (shadow), 
-     * depending on the input parameter "part"
-     */
-    switch (part) {
-      case "original":
-        matrix = this.matrix;
-        posX = this.pos.x;
-        posY = this.pos.y;
-        break;
-      case "ghost":
+    
+    if (part === "ghost") {
         matrix = this.ghost.matrix;
         posX = this.ghost.pos.x;
         posY = this.ghost.pos.y;
-        break;
     }
 
     matrix.forEach((row, y) => {
