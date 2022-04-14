@@ -46,7 +46,7 @@ const game = {
 
   start() {
     timer.start();
-
+    player.clearStats();
     // "this" might refer to restart button, so use "game"
     game.createPlayfield();
     game.newPiece();

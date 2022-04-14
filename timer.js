@@ -7,6 +7,7 @@ let timerInterval;
 
 const timer = {
   start() {
+    if (timerInterval) this.clearDisplay();
     clearInterval(timerInterval);
     timerInterval = setInterval(this.update, 10);
   },
@@ -32,10 +33,10 @@ const timer = {
   },
 
   stop() {
-    clearInterval(timerIntervaltimerInterval);
+    clearInterval(timerInterval);
   },
 
-  clear() {
+  clearDisplay() {
     tens = seconds = minutes = 0;
     appendSeconds.innerHTML = "00";
     appendMinutes.innerHTML = "00";
