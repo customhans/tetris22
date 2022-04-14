@@ -38,7 +38,7 @@ const game = {
   },
 
   selectRandomPiece() {
-    const randomNumber = (Math.random() * 7) | 0;
+    const randomNumber = (Math.random() * PIECES.length) | 0;
 
     // this needs to be a clone, otherwise source matrix gets changed
     return new Piece(structuredClone(PIECES[randomNumber]));
