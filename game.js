@@ -43,8 +43,9 @@ const game = {
   },
 
   start() {
-    this.createPlayfield();
-    this.newPiece();
+    // "this" might refer to restart button, so use "game"
+    game.createPlayfield();
+    game.newPiece();
     playfield = new Playfield();
     game.mainLoop();
   },
