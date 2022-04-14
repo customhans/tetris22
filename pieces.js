@@ -16,6 +16,11 @@ class Piece {
       game.stop();
     }
 
+    /**
+     * This draw function is used both for drawing
+     * the piece as well as the ghost (shadow), 
+     * depending on the input parameter "part"
+     */
     switch (part) {
       case "original":
         matrix = this.matrix;
