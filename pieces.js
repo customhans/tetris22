@@ -7,11 +7,6 @@ class Piece {
     this.ghost = null;
   }
 
-  static select() {
-    const randNr = Math.random() * 7 | 0;
-    return new Piece(pieces[randNr]);
-  }
-
   draw(ghost = false) {
     /**
     * Losing condition: If piece is immediately blocked

@@ -4,6 +4,7 @@ const game = {
     dropInterval: 1500,
     lastTime: 0,
     fr: null,
+    gravity: true,
   },
 
   config: {
@@ -17,16 +18,37 @@ const game = {
     // do stuff maybe
   },
 
+  updatePreviewPieces() {
+    let counter = this.nextThreePieces.length;
+    while(counter++ < 3) {
+      this.nextThreePieces.push(this.selectRandomPiece());
+    }
+  },
+
+  selectRandomPiece() {
+    const randNr = Math.random() * 7 | 0;
+    return new Piece(pieces[randNr]);
+  },
+
   start() {
     this.createPlayfield();
+    this.updatePreviewPieces();
     this.newPiece();
     playfield = new Playfield();
     game.mainLoop();
   },
 
   newPiece() {
-    this.piece = Piece.select()
+    // cut first of the nextThreePieces
+    this.piece = this.nextThreePieces.shift();
+
+    // immediately replace it in the preview array
+    this.updatePreviewPieces();
+    console.log(this.nextThreePieces)
+    //updatePreviewDisplay();
   },
+
+  
   
   resume() {
     this.mainLoop();
@@ -82,7 +104,7 @@ const game = {
     this.loop.dropCounter += deltaTime;
 
     if (this.loop.dropCounter > this.loop.dropInterval) {
-      this.piece.drop();
+      if (this.loop.gravity) this.piece.drop();
     }
   
     this.loop.lastTime = time;
