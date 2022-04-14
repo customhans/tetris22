@@ -38,7 +38,12 @@ button {
 
 .sidebar {
   width: 100px;
-  border: 1px solid;
+}
+
+.sidebar > div {
+  border: 2px dashed;
+  margin: 0 1em 1em;
+  padding: 1em;
 }
 
 #playfield {
