@@ -98,7 +98,7 @@ const game = {
   drawAll() {
     this.drawCanvas();
     playfield.draw();
-    this.piece.draw();
+    this.piece.draw("original");
     this.piece.getGhost();
   },
 

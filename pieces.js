@@ -7,7 +7,7 @@ class Piece {
     this.ghost = null;
   }
 
-  draw(ghost = false, matrix, posX, posY) {
+  draw(part, matrix, posX, posY) {
     /**
      * Losing condition: If piece is immediately blocked
      * at spawn location (pos.y === 0), the game is over
@@ -15,13 +15,8 @@ class Piece {
     if (!this.pos.y && this.collision()) {
       game.stop();
     }
-    const type = ghost ? "ghost" : "original";
 
-    // const matrix = ghost ? this.ghost.matrix : this.matrix;
-    // const posX = ghost ? this.ghost.pos.x : this.pos.x;
-    // const posY = ghost ? this.ghost.pos.y : this.pos.y;
-
-    switch (type) {
+    switch (part) {
       case "original":
         matrix = this.matrix;
         posX = this.pos.x;
@@ -37,10 +32,10 @@ class Piece {
     matrix.forEach((row, y) => {
       row.forEach((value, x) => {
         if (value) {
-          ctx.drawImage(images[value - 1][type], x + posX, y + posY, 1, 1);
+          ctx.drawImage(images[value - 1][part], x + posX, y + posY, 1, 1);
         }
-      });
-    });
+      })
+    })
   }
 
   drop() {
@@ -57,7 +52,7 @@ class Piece {
       this.ghost.pos.y++;
     }
     this.ghost.pos.y--;
-    this.draw(this.ghost);
+    this.draw("ghost");
   }
 
   hardDrop() {
